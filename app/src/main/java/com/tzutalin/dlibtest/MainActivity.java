@@ -262,7 +262,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         cameraIntent();
                     else if(userChoosenTask.equals("Choose from Library"))
                         galleryIntent();
+                    Log.i(userChoosenTask,"start rec");
                     demoStaticImage();
+                    Log.i(userChoosenTask,"end rec");
+                    Log.d(userChoosenTask,Integer.toString(cords.size()));
                 } else {
                     //code for deny
                 }
@@ -608,7 +611,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //demoPersonDet(imgPath);
         demoFaceDet(imgPath);
     }
-
+/*
     private void demoPersonDet(final String imgPath) {
         new AsyncTask<Void, Void, List<VisionDetRet>>() {
             @Override
@@ -627,7 +630,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             .setTitle("Person det")
                             .endConfig()
                             .build();
-                    mCard.add(card);*/
+                    mCard.add(card);--
                 } else {
                     Toast.makeText(getApplicationContext(), "No person", Toast.LENGTH_LONG).show();
                 }
@@ -648,7 +651,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }.execute();
     }
+    */
 
+    /**
+     * Detect faces
+     * @param imgPath
+     */
     private void demoFaceDet(final String imgPath) {
         new AsyncTask<Void, Void, List<VisionDetRet>>() {
             @Override

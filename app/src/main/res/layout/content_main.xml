@@ -18,7 +18,9 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="Select Selfie"
-         />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnSelectItem"
@@ -26,7 +28,10 @@
         android:layout_height="46dp"
         android:layout_marginBottom="36dp"
         android:text="Select item"
-         />
+        app:layout_constraintBottom_toTopOf="@+id/ivItem"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <ImageView
         android:id="@+id/ivImage"
@@ -34,14 +39,23 @@
         android:layout_height="123dp"
         android:layout_marginBottom="16dp"
         android:layout_marginTop="16dp"
-       />
+        app:layout_constraintBottom_toTopOf="@+id/btnSelectItem"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSelectPhoto"
+        app:layout_constraintVertical_bias="0.153"
+        app:srcCompat="@drawable/ic_launcher_foreground"/>
 
     <ImageView
         android:id="@+id/ivItem"
         android:layout_width="182dp"
         android:layout_height="128dp"
         android:layout_marginBottom="16dp"
-         />
+        app:layout_constraintBottom_toTopOf="@+id/selectCa"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_launcher_foreground" />
 
     <Spinner
         android:id="@+id/selectCa"
@@ -51,7 +65,9 @@
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:entries="@array/category_arr"
-         />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/submitButton"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/submitButton"
@@ -63,6 +79,8 @@
         android:layout_marginTop="16dp"
         android:onClick="submit"
         android:text="Submit"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivItem"/>
 
 </android.support.constraint.ConstraintLayout>

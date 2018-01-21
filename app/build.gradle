@@ -41,11 +41,14 @@ repositories {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //noinspection GradleCompatible
     implementation "com.android.support:appcompat-v7:${rootProject.ext.androidSupportSdkVersion}"
     implementation "com.android.support:design:${rootProject.ext.androidSupportSdkVersion}"
     implementation 'com.github.dexafree:materiallist:3.0.1'
     implementation 'com.jakewharton.timber:timber:4.5.1'
     implementation project(':dlib')
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+
 
     // Add AndroidJUnit
     androidTestImplementation "com.android.support:support-annotations:${rootProject.ext.androidSupportSdkVersion}"
