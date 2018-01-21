@@ -4,6 +4,7 @@
 
 package com.tzutalin.dlibtest;
 
+import android.content.Context;
 import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -350,8 +351,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == SELECT_FILE)
                 onSelectFromGalleryResult(data);
+
             else if (requestCode == REQUEST_CAMERA)
                 onCaptureImageResult(data);
+
+            demoStaticImage();
         }
     }
 
@@ -386,6 +390,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             try {
                 Uri selectedImage = data.getData();
                 image = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), data.getData());
+                image = scaleDownBitmap(image, 100, this);
                 String[] filePathColumn = {MediaStore.Images.Media.DATA};
                 // Get the cursor
                 Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
@@ -414,12 +419,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    /**
+     * Merges two images.
+     *
+     * @param view
+     */
     public void submit(View view){
         //convert bitmap to byte array
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        item = resizeImage(item, cords.get(2).x-cords.get(0).x, cords.get(1).y - cords.get(0).y);
-        int left = cords.get(0).x;
-        int top = 2 * cords.get(0).y - cords.get(1).y;
+        item = resizeImage(item, (cords.get(2).x-cords.get(0).x)*2, (cords.get(1).y - cords.get(0).y)*2);
+        int left = (int)(cords.get(0).x-(cords.get(2).x-cords.get(0).x)*0.2);
+        int top = (int)(3 * cords.get(0).y - 2*cords.get(1).y);
         selfie = combineImages(selfie, item, left, top);
         selfie.compress(Bitmap.CompressFormat.PNG, 100, stream);
         byte[] byteArray = stream.toByteArray();
@@ -433,6 +443,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(intent);
     }
 
+    private static Bitmap scaleDownBitmap(Bitmap photo, int newHeight, Context context) {
+        final float densityMultiplier = context.getResources().getDisplayMetrics().density;
+        int h= (int) (newHeight*densityMultiplier);
+        int w= (int) (h * photo.getWidth()/((double) photo.getHeight()));
+        photo=Bitmap.createScaledBitmap(photo, w, h, true);
+        return photo;
+    }
 
     public static Bitmap resizeImage(Bitmap bitmap, int w, int h)
     {
@@ -460,14 +477,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             selfie = selfie.copy(Bitmap.Config.ARGB_8888, true);
         }
 
-        Canvas canvas = new Canvas(selfie);
+        //Canvas canvas = new Canvas(selfie);
+        Bitmap selfieCopy = selfie.copy(selfie.getConfig(), true);
+        Canvas canvas = new Canvas(selfieCopy);
         Paint paint = new Paint();
 
         canvas.drawBitmap(item, left, top, paint);// 叠加新图b2 (120-85)/2= 17.5
         //canvas.save(Canvas.ALL_SAVE_FLAG);
         //canvas.restore();
 
-        return selfie;
+        return selfieCopy;
 
 
 
