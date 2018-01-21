@@ -1,108 +1,33 @@
-## dlib-android-app
+## virtual-fitting-room (for Android)
 
+An app that helps with fitting accessaries on any of your personal pictures that has your face in it!
+Matches you face in the picture and fits the chosen accessary on the right spot.
+
+Reference:
 [![Build Status](https://travis-ci.org/tzutalin/dlib-android-app.png)](https://travis-ci.org/tzutalin/dlib-android-app)
 [ ![Download](https://api.bintray.com/packages/tzutalin/maven/dlib-android-app/images/download.svg) ](https://bintray.com/tzutalin/maven/dlib-android-app/_latestVersion)
 
-See http://dlib.net for the main project documentation.
-
-See [dlib-android](https://github.com/tzutalin/dlib-android) for JNI lib. Refer to dlib-android/jni/jnilib_ex
-
-### Grap the source
-
-`$ git clone https://github.com/tzutalin/dlib-android-app.git`
+See [dlib-android](https://github.com/tzutalin/dlib-android) for JNI lib. Refer to dlib-android/jni/jnilib_ex apache license
+https://github.com/theappguruz/Android-Take-Photo-From-Camera-and-Gallery-Code-Sample Used under 
+https://stackoverflow.com/questions/3528735/failed-binder-transaction-when-putting-an-bitmap-dynamically-in-a-widget
+http://www.zhimengzhe.com/Androidkaifa/210791.html
 
 ### Features
 
-* Support HOG detector
+* Adding accessaries to a portrait for fitting
 
-* HOG Face detection
-
-* Facial Landmark/Expression
+* Saving the processed rendering to the local gallery
 
 ### Demo
-![](demo/demo1.png)
-![](demo/demo2.png)
-![](demo/demo3.png)
-
-[![Demo video](https://j.gifs.com/82n7Oo.gif)](https://www.youtube.com/watch?v=TbX3t7QNhvs)
-
-### Build
-
-#### Android app
-* Open Android studio to build
-
-* Use command line to build (Optional)
-
-On Windows platforms, type this command:
-
-`$ gradlew.bat assembleDebug`
-
-On Mac OS and Linux platforms, type these commands:
-
-```
-$ ./gradlew assembleDebug
-
-or
-
-$ make ; make install
-
-```
-
-#### Update shared lib (Optional)
-You can build shared library from [dlib-android](https://github.com/tzutalin/dlib-android)
-
-Copy the shared library to ./dlib/src/main/jniLibs/
-
-### Try directly
-
-Download and install the apk
-
-`$ adb install demo/app-debug.apk`
-
-Otherwise, import the library to your build.gradle
-
-```
-repositories {
-    maven {
-        url 'https://dl.bintray.com/tzutalin/maven'
-    }
-}
-
-dependencies {
-    implementation 'com.tzutalin.dlib-android-app:dlib:1.0.4'
-}
-
-```
-
-### Sample code
-
-Facial landmark detection
-```java
-FaceDet faceDet = new FaceDet(Constants.getFaceShapeModelPath());
-Bitmap bitmap = BitmapFactory.decodeFile("Image Path");
-List<VisionDetRet> results = faceDet.detect(bitmap);
-for (final VisionDetRet ret : results) {
-    String label = ret.getLabel();
-    int rectLeft = ret.getLeft();
-    int rectTop = ret.getTop();
-    int rectRight = ret.getRight();
-    int rectBottom = ret.getBottom();
-    // Get 68 landmark points
-    ArrayList<Point> landmarks = ret.getFaceLandmarks();
-    for (Point point : landmarks) {
-        int pointX = point.x;
-        int pointY = point.y;
-    }
-}
-```
-
-Pedestrian detection
-
-```java
-Pedestrian pedestrianDet = new PedestrianDet();
-List<VisionDetRet> personList = pedestrianDet.detect(imgPath);
-```
+![](demo/demo00.png)
 
 
-### License
-[License](LICENSE.md)
+### Instruction
+
+Download and install the apk.
+
+Choose a picture that has your face in it.
+
+Choose an accessary picture that has been cutout.
+
+Submit and enjoy the rendering.

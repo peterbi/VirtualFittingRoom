@@ -31,8 +31,10 @@ import android.media.Image;
 import android.media.Image.Plane;
 import android.media.ImageReader;
 import android.media.ImageReader.OnImageAvailableListener;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Trace;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
@@ -50,6 +52,7 @@ import java.util.List;
 /**
  * Class that takes in preview frames and converts the image to Bitmaps to process with dlib lib.
  */
+@RequiresApi(api = Build.VERSION_CODES.KITKAT)
 public class OnGetImageListener implements OnImageAvailableListener {
     private static final boolean SAVE_PREVIEW_BITMAP = false;
 
