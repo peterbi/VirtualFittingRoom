@@ -1,108 +1,58 @@
-## dlib-android-app
+## virtual-fitting-room (for Android)
 
+An app that helps with fitting accessaries on any of your personal pictures that has your face in it!
+Matches you face in the picture and fits the chosen accessary on the right spot.
+
+Reference:
 [![Build Status](https://travis-ci.org/tzutalin/dlib-android-app.png)](https://travis-ci.org/tzutalin/dlib-android-app)
 [ ![Download](https://api.bintray.com/packages/tzutalin/maven/dlib-android-app/images/download.svg) ](https://bintray.com/tzutalin/maven/dlib-android-app/_latestVersion)
 
-See http://dlib.net for the main project documentation.
-
 See [dlib-android](https://github.com/tzutalin/dlib-android) for JNI lib. Refer to dlib-android/jni/jnilib_ex
 
-### Grap the source
-
-`$ git clone https://github.com/tzutalin/dlib-android-app.git`
 
 ### Features
 
-* Support HOG detector
+* Adding accessaries to a portrait for fitting
 
-* HOG Face detection
-
-* Facial Landmark/Expression
+* Saving the processed rendering to the local gallery
 
 ### Demo
 ![](demo/demo1.png)
-![](demo/demo2.png)
-![](demo/demo3.png)
 
-[![Demo video](https://j.gifs.com/82n7Oo.gif)](https://www.youtube.com/watch?v=TbX3t7QNhvs)
 
-### Build
+### Instruction
 
-#### Android app
-* Open Android studio to build
+Download and install the apk.
 
-* Use command line to build (Optional)
+Choose a picture that has your face in it.
 
-On Windows platforms, type this command:
+Choose an accessary picture that has been cutout.
 
-`$ gradlew.bat assembleDebug`
+Submit and enjoy the rendering.
 
-On Mac OS and Linux platforms, type these commands:
-
-```
-$ ./gradlew assembleDebug
-
-or
-
-$ make ; make install
-
-```
-
-#### Update shared lib (Optional)
-You can build shared library from [dlib-android](https://github.com/tzutalin/dlib-android)
-
-Copy the shared library to ./dlib/src/main/jniLibs/
-
-### Try directly
-
-Download and install the apk
-
-`$ adb install demo/app-debug.apk`
-
-Otherwise, import the library to your build.gradle
-
-```
-repositories {
-    maven {
-        url 'https://dl.bintray.com/tzutalin/maven'
-    }
-}
-
-dependencies {
-    implementation 'com.tzutalin.dlib-android-app:dlib:1.0.4'
-}
-
-```
 
 ### Sample code
 
 Facial landmark detection
 ```java
-FaceDet faceDet = new FaceDet(Constants.getFaceShapeModelPath());
-Bitmap bitmap = BitmapFactory.decodeFile("Image Path");
-List<VisionDetRet> results = faceDet.detect(bitmap);
-for (final VisionDetRet ret : results) {
-    String label = ret.getLabel();
-    int rectLeft = ret.getLeft();
-    int rectTop = ret.getTop();
-    int rectRight = ret.getRight();
-    int rectBottom = ret.getBottom();
-    // Get 68 landmark points
-    ArrayList<Point> landmarks = ret.getFaceLandmarks();
-    for (Point point : landmarks) {
-        int pointX = point.x;
-        int pointY = point.y;
-    }
-}
+        for (VisionDetRet ret : results) {
+            Rect bounds = new Rect();
+            bounds.left = (int) (ret.getLeft() * resizeRatio);
+            bounds.top = (int) (ret.getTop() * resizeRatio);
+            bounds.right = (int) (ret.getRight() * resizeRatio);
+            bounds.bottom = (int) (ret.getBottom() * resizeRatio);
+            //canvas.drawRect(bounds, paint);
+            // Get landmark
+            ArrayList<Point> landmarks = ret.getFaceLandmarks();
+            int counter = 0;
+            for (Point point : landmarks) {
+                if((counter==0) || (counter==8) || (counter==16)) {
+                    cords.add(point);
+                    int pointX = (int) (point.x * resizeRatio);
+                    int pointY = (int) (point.y * resizeRatio);
+                    //canvas.drawCircle(pointX, pointY, 2, paint);
+                }
+                counter++;
+            }
+        }
 ```
-
-Pedestrian detection
-
-```java
-Pedestrian pedestrianDet = new PedestrianDet();
-List<VisionDetRet> personList = pedestrianDet.detect(imgPath);
-```
-
-
-### License
-[License](LICENSE.md)
