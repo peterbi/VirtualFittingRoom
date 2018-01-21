@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/itemImage"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.tzutalin.dlibtest.MainActivity"
+    tools:layout_editor_absoluteY="81dp"
+    tools:showIn="@layout/app_bar_main">
+
+    <Button
+        android:id="@+id/btnSelectPhoto"
+        android:layout_width="206dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Select Selfie"
+         />
+
+    <Button
+        android:id="@+id/btnSelectItem"
+        android:layout_width="229dp"
+        android:layout_height="46dp"
+        android:layout_marginBottom="36dp"
+        android:text="Select item"
+         />
+
+    <ImageView
+        android:id="@+id/ivImage"
+        android:layout_width="168dp"
+        android:layout_height="123dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
+       />
+
+    <ImageView
+        android:id="@+id/ivItem"
+        android:layout_width="182dp"
+        android:layout_height="128dp"
+        android:layout_marginBottom="16dp"
+         />
+
+    <Spinner
+        android:id="@+id/selectCa"
+        android:layout_width="183dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:entries="@array/category_arr"
+         />
+
+    <Button
+        android:id="@+id/submitButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight = "16dp"
+        android:layout_marginTop="16dp"
+        android:onClick="submit"
+        android:text="Submit"
+        />
+
+</android.support.constraint.ConstraintLayout>
