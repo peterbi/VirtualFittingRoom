@@ -17,7 +17,7 @@ See [dlib-android](https://github.com/tzutalin/dlib-android) for JNI lib. Refer 
 * Saving the processed rendering to the local gallery
 
 ### Demo
-![](demo/demo1.png)
+![](demo/demo00.png)
 
 
 ### Instruction
